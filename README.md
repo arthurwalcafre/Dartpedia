@@ -1,10 +1,10 @@
 Projeto Dartpedia 
 
-DOCUMENTAÇÃO:
+# DOCUMENTAÇÃO:
 
 O projeto foi desenvolvido na linguagem Dart baseado na trilha oficial de aprendizado. Durante o processo foram ensinados diversos conceitos fundamentais e diversos para entendermos como o Dart funciona na prática, dentre esses conceitos podemos citar: Programação orientada a objetos, programação assíncrona, registros de logs, Dados JSON e testes automatizados dentro de nossas tarefas. Conforme cada lição passa, entendemos que nosso objetivo é consolidar o trabalho em equipe no Github e aumentar o conhecimento sobre o sistema Dart. Além de tudo isso, podemos ver quão importante se torna o git e github em uma aplicação como a nossa. 
 
-OBJETIVOS:
+# OBJETIVOS:
 
 .Compreender conceitos a partir da Programação Orientada a Objetos.
 
@@ -37,15 +37,15 @@ Conteúdos trabalhados no Learn Flutter/Dart:
 - Programação Assíncrona (Realizado) 
 - Pacotes e Bibliotecas (Realizado) 
 - Programação Orientada a Objetos (Realizado)
-- Tratamento de Erros (Realizado)
-- Orientação a Objetos Avançada (Realizado)
-- Aprimoramento da Aplicação CLI (Realizado) 
+- Tratamento de Erros (Pendente)
+- Orientação a Objetos Avançada (Pendente)
+- Aprimoramento da Aplicação CLI (Pendente) 
 - Manipulação de Dados JSON (Pendente)
 - Testes Automatizados (Pendente) 
 - Consumo de APIs (Pendente) 
 - Logging (Pendente) 
         
- DESCRIÇÃO DAS PASTAS:
+# DESCRIÇÃO DAS PASTAS:
 
 bin/: ponto de entrada da aplicação.
 lib/: código-fonte principal e regras de negócio.
@@ -54,7 +54,16 @@ pubspec.yaml: gerenciamento de dependências e configurações do projeto.
 analysis_options.yaml: regras de análise estática do Dart.
 README.md: documentação do projeto.
 
-COMO EXECUTAR:
+# TAREFA ATUAL: LIÇÃO 5: Defina as relações com as classes.
+
+# COMO EXECUTAR A LIÇÃO 5:
+Comando: Dart run bin/cli.dart help
+
+# Saida: 
+Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
+ help:  Prints usage information to the command line.
+
+# COMO EXECUTAR O PROJETO:
 
 Clone o repositório
 1.git clone git@github.com:arthurwalcafre/dartpedia.git
@@ -65,20 +74,28 @@ dart pub get
 4.Execute a aplicação:
 dart run
 
-EQUIPE:
+# EQUIPE:
 
-LIDER:
+# LIDER:
 
 Arthur Walcafre Oliviera
-LIDERADOS:
+# LIDERADOS:
 
 Erick Simionato Santos 
 Felipe Pereira Limeira de Souza
 Maria Eduarda Morelo Dias
 
-REFERÊNCIAS:
+Tarefas futuras para serem realizadas: 
+6. Lidar com erros de forma elegante
+7. Amplie seu aplicativo com enums e extensões.
+8. Aprimore seu aplicativo CLI
+9. Trabalhar com dados JSON
+10. Teste seu aplicativo e código.
+11. Obter dados da internet
+12. Adicionar registro de logs para depuração e monitoramento.
 
-Documentação Oficial do Dart
-Guia de Linguagem Dart
 
-Criado e realizado para fins estudantis 
+# LICENÇA:
+Criada para fins pedagógicas juntamente ao Professor Irineu Moura Caldeira
+
+
