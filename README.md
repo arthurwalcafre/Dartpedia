@@ -54,9 +54,10 @@ pubspec.yaml: gerenciamento de dependências e configurações do projeto.
 analysis_options.yaml: regras de análise estática do Dart.
 README.md: documentação do projeto.
 
-# TAREFA ATUAL: LIÇÃO 5: Defina as relações com as classes.
+# Como estamos nas tarefas
+ TAREFA ATUAL: LIÇÃO 5: Defina as relações com as classes.
 
-# COMO EXECUTAR A LIÇÃO 5:
+ COMO EXECUTAR A LIÇÃO 5:
 Comando: Dart run bin/cli.dart help
 
 # Saida: 
