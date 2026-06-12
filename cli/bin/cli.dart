@@ -1518,7 +1518,7 @@ void main(List<String> arguments) {
 >>>>>>> Stashed changes
   commandRunner.run(arguments);
 }
-/*
+
 Saida Padrao ao executar o codigo:
 
 Comando: dart run bin/cli.dart invalid_command
