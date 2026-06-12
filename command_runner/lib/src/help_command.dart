@@ -1,5 +1,10 @@
-import 'dart:async';
+
+rt 'dart:async';
+
 import 'package:command_runner/command_runner.dart';
+
+import 'console.dart';
+import 'exceptions.dart';
 
 class HelpCommand extends Command {
   @override
@@ -9,37 +14,55 @@ class HelpCommand extends Command {
   String get description => 'Display help information.';
 
   @override
-  FutureOr<String> run(ArgResults args) {
-    var runner = args.command?.runner;
-    if (runner == null) {
-      throw ArgumentException('Missing runner instance.', name);
+  FutureOr<String> run(ArgResults args) async {
+    final buffer = StringBuffer();
+    buffer.writeln(runner.usage.titleText);
+
+    if (args.flag('verbose')) {
+      for (var cmd in runner.commands) {
+        buffer.write(_renderCommandVerbose(cmd));
+      }
+
+      return buffer.toString();
     }
 
-    if (args.commandArg != null) {
-      var cmdName = args.commandArg!;
+    if (args.hasOption('command')) {
+      var (:option, :input) = args.getOption('command');
+
       var cmd = runner.commands.firstWhere(
-        (c) => c.name == cmdName,
-        orElse: () => throw ArgumentException('Unknown command: $cmdName', name),
+        (command) => command.name == input,
+        orElse: () {
+          throw ArgumentException(
+            'Input ${args.commandArg} is not a known command.',
+          );
+        },
       );
+
       return _renderCommandVerbose(cmd);
     }
 
-    final StringBuffer buffer = StringBuffer();
-    buffer.writeln('Global options:');
-    buffer.writeln('  -h, --help    Print this usage information.');
-    buffer.writeln('');
-    buffer.writeln('Available commands:');
-
-    for (var cmd in runner.commands) {
-      buffer.write(_renderCommandVerbose(cmd));
+    // Verbose is false and no arg was passed in, so print basic usage.
+    for (var command in runner.commands) {
+      buffer.writeln(command.usage);
     }
 
-    return buffer.toString().trim();
+    return buffer.toString();
   }
 
   String _renderCommandVerbose(Command cmd) {
-    final StringBuffer buffer = StringBuffer();
-    buffer.writeln('  ${cmd.name.padRight(14)}${cmd.description}');
+    final indent = ' ' * 10;
+    final buffer = StringBuffer();
+    buffer.writeln(cmd.usage.instructionText); //abbr, name: description
+    buffer.writeln('$indent ${cmd.help}');
+    if (cmd.valueHelp != null) {
+      buffer.writeln(
+        '$indent [Argument] Required? ${cmd.requiresArgument}, Type: ${cmd.valueHelp}, Default: ${cmd.defaultValue ?? 'none'}',
+      );
+    }
+    buffer.writeln('$indent Options:');
+    for (var option in cmd.options) {
+      buffer.writeln('$indent ${option.usage}');
+    }
     return buffer.toString();
   }
 }
