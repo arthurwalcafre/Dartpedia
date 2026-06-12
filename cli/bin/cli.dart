@@ -1387,6 +1387,68 @@ void main(List<String> arguments) {
 
 -------------------------------------------------------------------------------
 
+Versao: 0.0.20
+
+Data: 11/06/2026
+
+Descricao do codigo: Tarefa 3: Atualize o arquivo cli.dart para usar o novo tratamento de erros.
+#
+Modifique cli/bin/cli.dartpara usar o novo tratamento de erros em CommandRunner.
+
+Abra o cli/bin/cli.dartarquivo.
+
+Atualize a mainfunção para passar uma onErrorfunção para o CommandRunner:
+
+cli/bin/cli.dart
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  // [Step 6 update] Add onError method
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+Este código passa uma onErrorfunção de retorno de chamada para o CommandRunnerconstrutor. Se ocorrer um erro durante a execução de um comando, a onErrorfunção de retorno de chamada é invocada com o objeto de erro. A função de retorno de chamada verifica se o erro é um `Error` Errorou um `Error` Exception. Se for um `Error` Error, ele é relançado. Se for um `Error` Exception, ele é impresso no console.
+
+Codigo:
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  // [Step 6 update] Add onError method
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+Saida Padrao ao executar o codigo:
+
+Comando: dart run bin/cli.dart invalid_command
+
+Saida: ArgumentException: The first word of input must be a command.
+ 
+-------------------------------------------------------------------------------
+
 Codigo valido ate aqui:
 
 Codigo:
@@ -1396,7 +1458,18 @@ import 'package:command_runner/command_runner.dart';
 const version = '0.0.1';
 
 void main(List<String> arguments) {
-  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  // [Step 6 update] Add onError method
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
+
 
