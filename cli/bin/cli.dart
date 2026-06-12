@@ -1318,9 +1318,17 @@ As funções printUsage` and` searchWikipedia, `or` e `or` getWikipediaArticlefo
 -------------------------------------------------------------------------------
 Versao: 0.0.19
 
+<<<<<<< HEAD
 Data: 11/06/2026
 
 Descricao do codigo: Atualize o arquivo cli.dart para usar o novo CommandRunner.
+=======
+Versao: 0.0.19
+
+Data: 11/06/2026
+
+Descricao od codigo: Atualize o arquivo cli.dart para usar o novo CommandRunner.
+>>>>>>> 1ad52fe (Licao 5: Tarefa 4: Atualize o arquivo cli.dart para usar o novo CommandRunner.)
 #
 Modifique cli/bin/cli.dartpara usar o novo CommandRunnere HelpCommand.
 
