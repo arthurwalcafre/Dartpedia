@@ -1474,7 +1474,7 @@ void main(List<String> arguments) {
   )..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
-
+         
 Saida Padrao ao executar o codigo:
 
 Comando: dart run bin/cli.dart invalid_command
