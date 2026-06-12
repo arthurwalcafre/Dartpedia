@@ -60,7 +60,7 @@ README.md: documentação do projeto.
  COMO EXECUTAR A LIÇÃO 5:
 Comando: Dart run bin/cli.dart help
 
-# Saida: 
+ Saida: 
 Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
  help:  Prints usage information to the command line.
 
@@ -77,10 +77,10 @@ dart run
 
 # EQUIPE:
 
-# LIDER:
+ LIDER:
 
 Arthur Walcafre Oliviera
-# LIDERADOS:
+ LIDERADOS:
 
 Erick Simionato Santos |
 Felipe Pereira Limeira de Souza |
