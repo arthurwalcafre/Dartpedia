@@ -82,9 +82,9 @@ dart run
 Arthur Walcafre Oliviera
 # LIDERADOS:
 
-Erick Simionato Santos 
-Felipe Pereira Limeira de Souza
-Maria Eduarda Morelo Dias
+Erick Simionato Santos |
+Felipe Pereira Limeira de Souza |
+Maria Eduarda Morelo Dias |
 
 Tarefas futuras para serem realizadas: 
 6. Lidar com erros de forma elegante
