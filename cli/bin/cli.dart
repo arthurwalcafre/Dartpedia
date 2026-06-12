@@ -1421,37 +1421,6 @@ void main(List<String> arguments) {
 Este código passa uma onErrorfunção de retorno de chamada para o CommandRunnerconstrutor. Se ocorrer um erro durante a execução de um comando, a onErrorfunção de retorno de chamada é invocada com o objeto de erro. A função de retorno de chamada verifica se o erro é um `Error` Errorou um `Error` Exception. Se for um `Error` Error, ele é relançado. Se for um `Error` Exception, ele é impresso no console.
 
 Codigo:
-
-import 'package:command_runner/command_runner.dart';
-
-const version = '0.0.1';
-
-void main(List<String> arguments) {
-  // [Step 6 update] Add onError method
-  var commandRunner = CommandRunner(
-    onError: (Object error) {
-      if (error is Error) {
-        throw error;
-      }
-      if (error is Exception) {
-        print(error);
-      }
-    },
-  )..addCommand(HelpCommand());
-  commandRunner.run(arguments);
-}
-
-Saida Padrao ao executar o codigo:
-
-Comando: dart run bin/cli.dart invalid_command
-
-Saida: ArgumentException: The first word of input must be a command.
- 
--------------------------------------------------------------------------------
-
-Codigo valido ate aqui:
-
-Codigo:
 */
 import 'package:command_runner/command_runner.dart';
 
@@ -1471,5 +1440,36 @@ void main(List<String> arguments) {
   )..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
+/*
+Saida Padrao ao executar o codigo:
 
+Comando: dart run bin/cli.dart invalid_command
+
+Saida: ArgumentException: The first word of input must be a command.
+ 
+-------------------------------------------------------------------------------
+
+Codigo valido ate aqui:
+
+Codigo:
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  // [Step 6 update] Add onError method
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+*/
 
