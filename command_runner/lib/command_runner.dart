@@ -9,4 +9,3 @@ export 'src/help_command.dart';
 export 'src/exceptions.dart'; // Add this line
 
 // TODO: Export any libraries intended for clients of this package.
-
