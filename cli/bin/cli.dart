@@ -1318,17 +1318,24 @@ As funções printUsage` and` searchWikipedia, `or` e `or` getWikipediaArticlefo
 -------------------------------------------------------------------------------
 Versao: 0.0.19
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 Data: 11/06/2026
 
 Descricao do codigo: Atualize o arquivo cli.dart para usar o novo CommandRunner.
 =======
+=======
+>>>>>>> Stashed changes
 Versao: 0.0.19
 
 Data: 11/06/2026
 
+<<<<<<< Updated upstream
 Descricao od codigo: Atualize o arquivo cli.dart para usar o novo CommandRunner.
 >>>>>>> 1ad52fe (Licao 5: Tarefa 4: Atualize o arquivo cli.dart para usar o novo CommandRunner.)
+=======
+Descricao do codigo: Tarefa 4: Atualize o arquivo cli.dart para usar o novo CommandRunner.
+>>>>>>> Stashed changes
 #
 Modifique cli/bin/cli.dartpara usar o novo CommandRunnere HelpCommand.
 
@@ -1347,6 +1354,7 @@ void main(List<String> arguments) {
 }
 Este código cria uma CommandRunnerinstância, adiciona o HelpCommanda ela usando um método cascade ( ..addCommand) que permite chamar um método em um objeto diretamente após criá-lo e, em seguida, executa o executor de comandos com os argumentos da linha de comando.
 
+<<<<<<< Updated upstream
 Codigo: import 'package:command_runner/command_runner.dart';
 
 const version = '0.0.1';
@@ -1366,8 +1374,23 @@ Saida: Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
 -------------------------------------------------------------------------------
 
 Codigo: 
-*/ 
+ 
 
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+-------------------------------------------------------------------------------
+
+Codigo valido ate aqui:
+
+Codigo:
+*/
 import 'package:command_runner/command_runner.dart';
 
 const version = '0.0.1';
