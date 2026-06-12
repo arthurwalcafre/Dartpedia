@@ -1,108 +1,45 @@
 import 'dart:async';
-
-<<<<<<< Updated upstream
-import 'arguments.dart';
-
-// Prints program and argument usage.
-//
-// When given a command as an argument, it prints the usage of
-// that command only, including its options and other details.
-// When the flag 'verbose' is set, it prints options and details for all commands.
-//
-// This command isn't automatically added to CommandRunner instances.
-// Packages users should add it themselves with [CommandRunner.addCommand],
-// or create their own command that prints usage.
-
-class HelpCommand extends Command {
-  HelpCommand() {
-    addFlag(
-      'verbose',
-      abbr: 'v',
-      help: 'When true, this command will print each command and its options.',
-    );
-    addOption(
-      'command',
-      abbr: 'c',
-      help:
-          "When a command is passed as an argument, prints only that command's verbose usage.",
-    );
-  }
-  @override
-  String get name => 'help';
-
-  @override
-  String get description => 'Prints usage information to the command line.';
-
-  @override
-  String? get help => 'Prints this usage information';
-=======
 import 'package:command_runner/command_runner.dart';
 
-import 'console.dart';
-import 'exceptions.dart';
-
 class HelpCommand extends Command {
   @override
   String get name => 'help';
->>>>>>> Stashed changes
 
   @override
   String get description => 'Display help information.';
 
   @override
-  FutureOr<String> run(ArgResults args) async {
-    final buffer = StringBuffer();
-    buffer.writeln(runner.usage.titleText);
-
-    if (args.flag('verbose')) {
-      for (var cmd in runner.commands) {
-        buffer.write(_renderCommandVerbose(cmd));
-      }
-
-      return buffer.toString();
+  FutureOr<String> run(ArgResults args) {
+    var runner = args.command?.runner;
+    if (runner == null) {
+      throw ArgumentException('Missing runner instance.', name);
     }
 
-<<<<<<< Updated upstream
-    return usage;
-=======
-    if (args.hasOption('command')) {
-      var (:option, :input) = args.getOption('command');
-
+    if (args.commandArg != null) {
+      var cmdName = args.commandArg!;
       var cmd = runner.commands.firstWhere(
-        (command) => command.name == input,
-        orElse: () {
-          throw ArgumentException(
-            'Input ${args.commandArg} is not a known command.',
-          );
-        },
+        (c) => c.name == cmdName,
+        orElse: () => throw ArgumentException('Unknown command: $cmdName', name),
       );
-
       return _renderCommandVerbose(cmd);
     }
 
-    // Verbose is false and no arg was passed in, so print basic usage.
-    for (var command in runner.commands) {
-      buffer.writeln(command.usage);
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln('Global options:');
+    buffer.writeln('  -h, --help    Print this usage information.');
+    buffer.writeln('');
+    buffer.writeln('Available commands:');
+
+    for (var cmd in runner.commands) {
+      buffer.write(_renderCommandVerbose(cmd));
     }
 
-    return buffer.toString();
+    return buffer.toString().trim();
   }
 
   String _renderCommandVerbose(Command cmd) {
-    final indent = ' ' * 10;
-    final buffer = StringBuffer();
-    buffer.writeln(cmd.usage.instructionText); //abbr, name: description
-    buffer.writeln('$indent ${cmd.help}');
-    if (cmd.valueHelp != null) {
-      buffer.writeln(
-        '$indent [Argument] Required? ${cmd.requiresArgument}, Type: ${cmd.valueHelp}, Default: ${cmd.defaultValue ?? 'none'}',
-      );
-    }
-    buffer.writeln('$indent Options:');
-    for (var option in cmd.options) {
-      buffer.writeln('$indent ${option.usage}');
-    }
+    final StringBuffer buffer = StringBuffer();
+    buffer.writeln('  ${cmd.name.padRight(14)}${cmd.description}');
     return buffer.toString();
->>>>>>> Stashed changes
   }
 }
