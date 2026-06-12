@@ -1316,14 +1316,56 @@ Funções removidas:
 As funções printUsage` and` searchWikipedia, `or` e `or` getWikipediaArticleforam completamente removidas do pacote ` command-line` cli/bin/cli.dart. Sua lógica será reformulada e integrada ao command_runnerpacote `command-line` em capítulos futuros, como parte da construção da estrutura completa do `command-line`.
 
 -------------------------------------------------------------------------------
+Versao: 0.0.19
 
-Codigo:
-*/
-import 'dart:io';
-import 'package:http/http.dart' as http;
+Data: 11/06/2026
+
+Descricao do codigo: Atualize o arquivo cli.dart para usar o novo CommandRunner.
+#
+Modifique cli/bin/cli.dartpara usar o novo CommandRunnere HelpCommand.
+
+Abra o cli/bin/cli.dartarquivo.
+
+Substitua o código existente pelo seguinte:
+
+cli/bin/cli.dart
 import 'package:command_runner/command_runner.dart';
 
-void main(List<String> arguments) async { // main is now async and awaits the runner
-  var runner = CommandRunner(); // Create an instance of your new CommandRunner
-  await runner.run(arguments); // Call its run method, awaiting its Future<void>
-} 
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+Este código cria uma CommandRunnerinstância, adiciona o HelpCommanda ela usando um método cascade ( ..addCommand) que permite chamar um método em um objeto diretamente após criá-lo e, em seguida, executa o executor de comandos com os argumentos da linha de comando.
+
+Codigo: import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+Saida padrao ao executar o codigo:
+
+Codigo: dart run bin/cli.dart help
+
+Saida: Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
+ help:  Prints usage information to the command line.
+
+-------------------------------------------------------------------------------
+
+Codigo: 
+*/ 
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+

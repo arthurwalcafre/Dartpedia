@@ -17,20 +17,17 @@ class CommandRunner {
   }
 
   void addCommand(Command command) {
-    // TODO: handle error (Commands can't have names that conflict)
     _commands[command.name] = command;
-    command.runner = this;
+    command.runner = this; // Inicializa a propriedade 'late' do comando
   }
 
   ArgResults parse(List<String> input) {
     var results = ArgResults();
-    results.command = _commands[input.first];
+    if (input.isNotEmpty && _commands.containsKey(input.first)) {
+      results.command = _commands[input.first];
+    }
     return results;
   }
-
-  // Returns usage for the executable only.
-  // Should be overridden if you aren't using [HelpCommand]
-  // or another means of printing usage.
 
   String get usage {
     final exeFile = Platform.script.path.split('/').last;
