@@ -1,4 +1,4 @@
-
+class Article {
   Article({required this.title, required this.extract});
 
   final String title;
@@ -30,4 +30,3 @@
     return 'Article{title: $title, extract: $extract}';
   }
 }
-
