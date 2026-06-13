@@ -49,4 +49,4 @@ class GetArticleCommand extends Command {
       return e.message;
     }
   }
-}
+}                       
