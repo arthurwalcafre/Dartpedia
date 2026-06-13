@@ -305,7 +305,7 @@
       "name": "cli",
       "rootUri": "../cli",
       "packageUri": "lib/",
-      "languageVersion": "3.11"
+      "languageVersion": "3.12"
     },
     {
       "name": "command_runner",

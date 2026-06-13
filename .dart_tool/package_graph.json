@@ -17,10 +17,13 @@
       "version": "1.0.0",
       "dependencies": [
         "command_runner",
-        "http"
+        "http",
+        "logging",
+        "wikipedia"
       ],
       "devDependencies": [
-        "lints"
+        "lints",
+        "test"
       ]
     },
     {
@@ -38,6 +41,7 @@
       "name": "wikipedia",
       "version": "1.0.0",
       "dependencies": [
+        "http",
         "path"
       ],
       "devDependencies": [
@@ -87,11 +91,6 @@
       "dependencies": []
     },
     {
-      "name": "args",
-      "version": "2.7.0",
-      "dependencies": []
-    },
-    {
       "name": "http",
       "version": "1.6.0",
       "dependencies": [
@@ -100,6 +99,16 @@
         "meta",
         "web"
       ]
+    },
+    {
+      "name": "args",
+      "version": "2.7.0",
+      "dependencies": []
+    },
+    {
+      "name": "logging",
+      "version": "1.3.0",
+      "dependencies": []
     },
     {
       "name": "yaml",
@@ -370,11 +379,6 @@
       "dependencies": [
         "source_span"
       ]
-    },
-    {
-      "name": "logging",
-      "version": "1.3.0",
-      "dependencies": []
     },
     {
       "name": "web_socket",
