@@ -1559,28 +1559,117 @@ Saida:
 
 -------------------------------------------------------------------------------
 
-Codigo valido ate aqui:
+Versao: 0.0.22
 
-Codigo:
-*/
+Data: 12/06/2026
+
+Descricao do codigo: Tarefa 3: Use o registrador emcli.dart
+#
+Agora, utilize a initFileLoggerfunção cli/bin/cli.dartpara criar uma instância de logger e registrar mensagens em um arquivo.
+
+Abra o cli/bin/cli.dartarquivo.
+
+Adicione a importação para o logger:
+
+cli/bin/cli.dart
+import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
+Modifique a mainfunção para inicializar o registrador de logs e passe-a para os comandos:
+
+cli/bin/cli.dart
+import 'package:cli/cli.dart';
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.1';
+void main(List<String> arguments) async {
+  final errorLogger = initFileLogger('errors');
+  final app =
+      CommandRunner(
+          onOutput: (String output) async {
+            await write(output);
+          },
+          onError: (Object error) {
+            if (error is Error) {
+              errorLogger.severe(
+                '[Error] ${error.toString()}\n${error.stackTrace}',
+              );
+              throw error;
+            }
+            if (error is Exception) {
+              errorLogger.warning(error);
+            }
+          },
+        )
+        ..addCommand(HelpCommand())
+        ..addCommand(SearchCommand(logger: errorLogger))
+        ..addCommand(GetArticleCommand(logger: errorLogger));
 
-void main(List<String> arguments) {
-  var commandRunner = CommandRunner(
+  app.run(arguments);
+}
+Este código faz o seguinte:
+
+Ele inicializa uma Loggerinstância usando initFileLogger('errors').
+Ele passa a loggerinstância para CommandRunneros comandos individuais.
+
+Codigo: 
+
+import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
+
+void main(List<String> arguments) async {
+  final errorLogger = initFileLogger('errors');
+  final app = CommandRunner(
     onOutput: (String output) async {
       await write(output);
     },
     onError: (Object error) {
       if (error is Error) {
+        errorLogger.severe(
+          '[Error] ${error.toString()}\n${error.stackTrace}',
+        );
         throw error;
       }
       if (error is Exception) {
-        print(error);
+        errorLogger.warning(error);
       }
     },
-  )..addCommand(HelpCommand());
-  commandRunner.run(arguments);
+  )
+    ..addCommand(HelpCommand())
+    ..addCommand(SearchCommand(logger: errorLogger))
+    ..addCommand(GetArticleCommand(logger: errorLogger));
+
+  app.run(arguments);
 }
 
+-------------------------------------------------------------------------------
+
+Codigo valido ate aqui:
+
+Codigo:
+*/
+import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
+
+void main(List<String> arguments) async {
+  final errorLogger = initFileLogger('errors');
+  final app = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        errorLogger.severe(
+          '[Error] ${error.toString()}\n${error.stackTrace}',
+        );
+        throw error;
+      }
+      if (error is Exception) {
+        errorLogger.warning(error);
+      }
+    },
+  )
+    ..addCommand(HelpCommand())
+    ..addCommand(SearchCommand(logger: errorLogger))
+    ..addCommand(GetArticleCommand(logger: errorLogger));
+
+  app.run(arguments);
+}
