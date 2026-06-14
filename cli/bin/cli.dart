@@ -1344,7 +1344,7 @@ Abra o cli/bin/cli.dartarquivo.
 Substitua o código existente pelo seguinte:
 
 cli/bin/cli.dart
-*/
+
 import 'package:command_runner/command_runner.dart';
 
 const version = '0.0.1';
@@ -1353,7 +1353,7 @@ void main(List<String> arguments) {
   var commandRunner = CommandRunner()..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
-/*
+
 Este código cria uma CommandRunnerinstância, adiciona o HelpCommanda ela usando um método cascade ( ..addCommand) que permite chamar um método em um objeto diretamente após criá-lo e, em seguida, executa o executor de comandos com os argumentos da linha de comando.
 
 <<<<<<< Updated upstream
