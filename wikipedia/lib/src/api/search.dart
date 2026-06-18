@@ -1,9 +1,6 @@
-
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
-
 import '../model/search_results.dart';
 
 Future<SearchResults> search(String searchTerm) async {
@@ -12,7 +9,7 @@ Future<SearchResults> search(String searchTerm) async {
     final Uri url = Uri.https(
       'en.wikipedia.org',
       '/w/api.php',
-      <String, Object?>{
+      {
         'action': 'opensearch',
         'format': 'json',
         'search': searchTerm,
@@ -24,9 +21,8 @@ Future<SearchResults> search(String searchTerm) async {
       return SearchResults.fromJson(jsonData);
     } else {
       throw HttpException(
-        '[WikimediaApiClient.getArticleByTitle] '
-        'statusCode=${response.statusCode}, '
-        'body=${response.body}',
+        '[WikipediaDart.search] statusCode=${response.statusCode}, body=${response.body}',
+        uri: url,
       );
     }
   } on FormatException {
@@ -35,4 +31,3 @@ Future<SearchResults> search(String searchTerm) async {
     client.close();
   }
 }
-

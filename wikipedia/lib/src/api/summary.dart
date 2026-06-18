@@ -55,4 +55,4 @@ Future<Summary> getArticleSummaryByTitle(String articleTitle) async {
   } finally {
     client.close();
   }
-
+} 
