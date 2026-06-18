@@ -24,70 +24,82 @@ class Selecao {
 }
 
 // =========================================================================
-// ALUNO 4 (Parte 1): O Analista de Dados - Banco de Dados Centralizado (48 Seleções)
+// ALUNO 4 (Parte 1): O Analista de Dados - Banco de Dados Atualizado Oficiais
 // =========================================================================
 
 class BancoDadosCopa {
   static List<Selecao> inicializarSelecoes() {
     return [
+      // GRUPO A
       Selecao(nome: "México", grupo: Grupo.A, rankingFifa: 15),
       Selecao(nome: "África do Sul", grupo: Grupo.A, rankingFifa: 59),
-      Selecao(nome: "Rep. Checa", grupo: Grupo.A, rankingFifa: 36),
       Selecao(nome: "Coreia do Sul", grupo: Grupo.A, rankingFifa: 22),
+      Selecao(nome: "Rep. Tcheca", grupo: Grupo.A, rankingFifa: 36),
 
+      // GRUPO B
       Selecao(nome: "Canadá", grupo: Grupo.B, rankingFifa: 40),
-      Selecao(nome: "Suíça", grupo: Grupo.B, rankingFifa: 12), // Corrigido aqui!
-      Selecao(nome: "Malásia", grupo: Grupo.B, rankingFifa: 130),
-      Selecao(nome: "Togo", grupo: Grupo.B, rankingFifa: 110),
+      Selecao(nome: "Bósnia", grupo: Grupo.B, rankingFifa: 75),
+      Selecao(nome: "Catar", grupo: Grupo.B, rankingFifa: 50),
+      Selecao(nome: "Suíça", grupo: Grupo.B, rankingFifa: 12),
 
-      Selecao(nome: "Estados Unidos", grupo: Grupo.C, rankingFifa: 11),
-      Selecao(nome: "Uruguai", grupo: Grupo.C, rankingFifa: 14),
+      // GRUPO C
+      Selecao(nome: "Brasil", grupo: Grupo.C, rankingFifa: 5),
       Selecao(nome: "Marrocos", grupo: Grupo.C, rankingFifa: 13),
-      Selecao(nome: "Fiji", grupo: Grupo.C, rankingFifa: 160),
+      Selecao(nome: "Haiti", grupo: Grupo.C, rankingFifa: 86),
+      Selecao(nome: "Escócia", grupo: Grupo.C, rankingFifa: 39),
 
-      Selecao(nome: "Brasil", grupo: Grupo.D, rankingFifa: 5),
-      Selecao(nome: "Inglaterra", grupo: Grupo.D, rankingFifa: 4),
-      Selecao(nome: "Gana", grupo: Grupo.D, rankingFifa: 64),
-      Selecao(nome: "Nova Zelândia", grupo: Grupo.D, rankingFifa: 94),
+      // GRUPO D
+      Selecao(nome: "Estados Unidos", grupo: Grupo.D, rankingFifa: 11),
+      Selecao(nome: "Paraguai", grupo: Grupo.D, rankingFifa: 56),
+      Selecao(nome: "Austrália", grupo: Grupo.D, rankingFifa: 24),
+      Selecao(nome: "Turquia", grupo: Grupo.D, rankingFifa: 26),
 
-      Selecao(nome: "Argentina", grupo: Grupo.E, rankingFifa: 1),
-      Selecao(nome: "França", grupo: Grupo.E, rankingFifa: 2),
-      Selecao(nome: "Austrália", grupo: Grupo.E, rankingFifa: 24),
-      Selecao(nome: "Jamaica", grupo: Grupo.E, rankingFifa: 55),
+      // GRUPO E
+      Selecao(nome: "Alemanha", grupo: Grupo.E, rankingFifa: 16),
+      Selecao(nome: "Curaçau", grupo: Grupo.E, rankingFifa: 90),
+      Selecao(nome: "Costa do Marfim", grupo: Grupo.E, rankingFifa: 38),
+      Selecao(nome: "Equador", grupo: Grupo.E, rankingFifa: 31),
 
-      Selecao(nome: "Bélgica", grupo: Grupo.F, rankingFifa: 3),
-      Selecao(nome: "Portugal", grupo: Grupo.F, rankingFifa: 6),
-      Selecao(nome: "Escócia", grupo: Grupo.F, rankingFifa: 39),
-      Selecao(nome: "Iraque", grupo: Grupo.F, rankingFifa: 58),
+      // GRUPO F
+      Selecao(nome: "Holanda", grupo: Grupo.F, rankingFifa: 7),
+      Selecao(nome: "Japão", grupo: Grupo.F, rankingFifa: 18),
+      Selecao(nome: "Suécia", grupo: Grupo.F, rankingFifa: 23),
+      Selecao(nome: "Tunísia", grupo: Grupo.F, rankingFifa: 41),
 
-      Selecao(nome: "Espanha", grupo: Grupo.G, rankingFifa: 8),
-      Selecao(nome: "Japão", grupo: Grupo.G, rankingFifa: 18),
-      Selecao(nome: "Nigéria", grupo: Grupo.G, rankingFifa: 30),
-      Selecao(nome: "Honduras", grupo: Grupo.G, rankingFifa: 78),
+      // GRUPO G
+      Selecao(nome: "Bélgica", grupo: Grupo.G, rankingFifa: 3),
+      Selecao(nome: "Egito", grupo: Grupo.G, rankingFifa: 36),
+      Selecao(nome: "Irã", grupo: Grupo.G, rankingFifa: 20),
+      Selecao(nome: "Nova Zelândia", grupo: Grupo.G, rankingFifa: 94),
 
-      Selecao(nome: "Holanda", grupo: Grupo.H, rankingFifa: 7),
-      Selecao(nome: "Itália", grupo: Grupo.H, rankingFifa: 9),
-      Selecao(nome: "Egito", grupo: Grupo.H, rankingFifa: 36),
-      Selecao(nome: "Ucrânia", grupo: Grupo.H, rankingFifa: 22),
+      // GRUPO H
+      Selecao(nome: "Espanha", grupo: Grupo.H, rankingFifa: 8),
+      Selecao(nome: "Cabo Verde", grupo: Grupo.H, rankingFifa: 65),
+      Selecao(nome: "Arábia Saudita", grupo: Grupo.H, rankingFifa: 53),
+      Selecao(nome: "Uruguai", grupo: Grupo.H, rankingFifa: 14),
 
-      Selecao(nome: "Croácia", grupo: Grupo.I, rankingFifa: 10),
-      Selecao(nome: "Equador", grupo: Grupo.I, rankingFifa: 31),
-      Selecao(nome: "Irã", grupo: Grupo.I, rankingFifa: 20),
-      Selecao(nome: "Zâmbia", grupo: Grupo.I, rankingFifa: 86),
+      // GRUPO I
+      Selecao(nome: "França", grupo: Grupo.I, rankingFifa: 2),
+      Selecao(nome: "Senegal", grupo: Grupo.I, rankingFifa: 21),
+      Selecao(nome: "Iraque", grupo: Grupo.I, rankingFifa: 58),
+      Selecao(nome: "Noruega", grupo: Grupo.I, rankingFifa: 47),
 
-      Selecao(nome: "Alemanha", grupo: Grupo.J, rankingFifa: 16),
-      Selecao(nome: "Dinamarca", grupo: Grupo.J, rankingFifa: 19),
+      // GRUPO J
+      Selecao(nome: "Argentina", grupo: Grupo.J, rankingFifa: 1),
       Selecao(nome: "Argélia", grupo: Grupo.J, rankingFifa: 43),
-      Selecao(nome: "Omã", grupo: Grupo.J, rankingFifa: 73),
+      Selecao(nome: "Áustria", grupo: Grupo.J, rankingFifa: 25),
+      Selecao(nome: "Jordânia", grupo: Grupo.J, rankingFifa: 71),
 
-      Selecao(nome: "Chile", grupo: Grupo.K, rankingFifa: 42),
-      Selecao(nome: "Suécia", grupo: Grupo.K, rankingFifa: 23),
-      Selecao(nome: "Mali", grupo: Grupo.K, rankingFifa: 44),
-      Selecao(nome: "Catar", grupo: Grupo.K, rankingFifa: 50),
+      // GRUPO K
+      Selecao(nome: "Portugal", grupo: Grupo.K, rankingFifa: 6),
+      Selecao(nome: "RD do Congo", grupo: Grupo.K, rankingFifa: 61),
+      Selecao(nome: "Uzbequistão", grupo: Grupo.K, rankingFifa: 68),
+      Selecao(nome: "Colômbia", grupo: Grupo.K, rankingFifa: 12),
 
-      Selecao(nome: "Sérvia", grupo: Grupo.L, rankingFifa: 32),
-      Selecao(nome: "Paraguai", grupo: Grupo.L, rankingFifa: 56),
-      Selecao(nome: "Camarões", grupo: Grupo.L, rankingFifa: 49),
+      // GRUPO L
+      Selecao(nome: "Inglaterra", grupo: Grupo.L, rankingFifa: 4),
+      Selecao(nome: "Croácia", grupo: Grupo.L, rankingFifa: 10), // Corrigido aqui!
+      Selecao(nome: "Gana", grupo: Grupo.L, rankingFifa: 64),
       Selecao(nome: "Panamá", grupo: Grupo.L, rankingFifa: 45)
     ];
   }
@@ -225,20 +237,20 @@ void main() async {
   await Future.delayed(Duration(seconds: 1));
   
   List<Selecao> todasSelecoes = BancoDadosCopa.inicializarSelecoes();
-  String grupoAtivo = "A";
+  String groupAtivo = "A"; // Mantido local para controle do loop do menu
   
   bool rodando = true;
   while (rodando) {
     List<Selecao> selecoesDoGrupo = todasSelecoes
-        .where((s) => s.grupo.toString().split('.').last == grupoAtivo)
+        .where((s) => s.grupo.toString().split('.').last == groupAtivo)
         .toList();
 
     print("\n==============================================");
-    print("STATUS: Gerenciando o GRUPO $grupoAtivo (48 Seleções Ativas)");
+    print("STATUS: Gerenciando o GRUPO $groupAtivo (48 Seleções Ativas)");
     print("==============================================");
     print("1. Alterar Grupo Atual (A até L)");
     print("2. Registrar Resultado de Jogo");
-    print("3. Ver Classificação do Grupo $grupoAtivo");
+    print("3. Ver Classificação do Grupo $groupAtivo");
     print("4. Sair");
     stdout.write("Selecione uma opção: ");
     
@@ -249,8 +261,8 @@ void main() async {
         stdout.write("Digite a letra do grupo desejado (De A a L): ");
         String? novaLetra = stdin.readLineSync()?.toUpperCase();
         if (novaLetra != null && RegExp(r'^[A-L]$').hasMatch(novaLetra)) {
-          grupoAtivo = novaLetra;
-          print("Mudou para o Grupo $grupoAtivo!");
+          groupAtivo = novaLetra;
+          print("Mudou para o Grupo $groupAtivo!");
         } else {
           print("\nErro: Grupo inválido! Escolha uma letra entre A e L.");
         }
@@ -259,7 +271,7 @@ void main() async {
         registrarResultadoJogo(selecoesDoGrupo);
         break;
       case '3':
-        exibirClassificacao(selecoesDoGrupo, grupoAtivo);
+        exibirClassificacao(selecoesDoGrupo, groupAtivo);
         break;
       case '4':
         print("\nFechando o simulador da Copa 2026. Até logo!");
