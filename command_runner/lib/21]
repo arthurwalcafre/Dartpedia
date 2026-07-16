@@ -1,0 +1,12 @@
+// Aluno 1 iniciando simulador da copa de 2026
+
+import: 'dart:io';
+
+enum Grupo { A, B, C, D, E, F, G, H, I, J, K, L } 
+
+class Selecao {
+	String nome;
+	grupo Grupo;
+	int pontos;
+	int golsPro;	
+
