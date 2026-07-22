@@ -55,14 +55,7 @@ analysis_options.yaml: regras de análise estática do Dart.
 README.md: documentação do projeto.
 
 # Como estamos nas tarefas
- TAREFA ATUAL: LIÇÃO 5: Defina as relações com as classes.
-
- COMO EXECUTAR A LIÇÃO 5:
-Comando: Dart run bin/cli.dart help
-
- Saida: 
-Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
- help:  Prints usage information to the command line.
+ Finalizamos as 12 atividades propostas para nós dentro do cloud shell em conjunto com o Dart learn.
 
 # COMO EXECUTAR O PROJETO:
 
