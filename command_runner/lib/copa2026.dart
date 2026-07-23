@@ -282,3 +282,61 @@ void main() async {
     }
   }
 }
+
+import 'dart:io';
+
+void registrarJogo(Selecao timeA, Selecao timeB) {
+  print('--- REGISTRAR JOGO ---');
+
+  // 1. Pede os gols do primeiro time
+  print('Gols do ' + timeA.nome + ':');
+  String textoGolsA = stdin.readLineSync()!;
+  int golsA = int.parse(textoGolsA);
+
+  // 2. Pede os gols do segundo time
+  print('Gols do ' + timeB.nome + ':');
+  String textoGolsB = stdin.readLineSync()!;
+  int golsB = int.parse(textoGolsB);
+
+  // 3. Pede os cartões amarelos do primeiro time
+  print('Cartoes amarelos do ' + timeA.nome + ':');
+  String textoCartoesA = stdin.readLineSync()!;
+  int cartoesA = int.parse(textoCartoesA);
+
+  // 4. Pede os cartões amarelos do segundo time
+  print('Cartoes amarelos do ' + timeB.nome + ':');
+  String textoCartoesB = stdin.readLineSync()!;
+  int cartoesB = int.parse(textoCartoesB);
+
+  // 5. Atualiza os gols nos times
+  timeA.golsPro = timeA.golsPro + golsA;
+  timeA.golsSofridos = timeA.golsSofridos + golsB;
+
+  timeB.golsPro = timeB.golsPro + golsB;
+  timeB.golsSofridos = timeB.golsSofridos + golsA;
+
+  // 6. Atualiza os cartões nos times
+  timeA.cartoesAmarelos = timeA.cartoesAmarelos + cartoesA;
+  timeB.cartoesAmarelos = timeB.cartoesAmarelos + cartoesB;
+
+  // 7. Calcula os pontos
+  if (golsA > golsB) {
+    // Time A ganhou
+    timeA.pontos = timeA.pontos + 3;
+    print(timeA.nome + ' venceu!');
+  }
+
+  if (golsB > golsA) {
+    // Time B ganhou
+    timeB.pontos = timeB.pontos + 3;
+    print(timeB.nome + ' venceu!');
+  }
+
+  if (golsA == golsB) {
+    // Empate
+    timeA.pontos = timeA.pontos + 1;
+    timeB.pontos = timeB.pontos + 1;
+    print('Empate!');
+  }
+}
+
