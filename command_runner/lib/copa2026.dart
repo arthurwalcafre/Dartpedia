@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 // =========================================================================
 // ALUNO 1: O Modelador de Seleções (Classes e Enums)
@@ -24,7 +25,7 @@ class Selecao {
 }
 
 // =========================================================================
-// ALUNO 4 (Parte 1): O Analista de Dados - Banco de Dados Atualizado Oficiais
+// ALUNO 4 (Parte 1): O Analista de Dados - Banco de Dados Oficial
 // =========================================================================
 
 class BancoDadosCopa {
@@ -98,7 +99,7 @@ class BancoDadosCopa {
 
       // GRUPO L
       Selecao(nome: "Inglaterra", grupo: Grupo.L, rankingFifa: 4),
-      Selecao(nome: "Croácia", grupo: Grupo.L, rankingFifa: 10), // Corrigido aqui!
+      Selecao(nome: "Croácia", grupo: Grupo.L, rankingFifa: 10),
       Selecao(nome: "Gana", grupo: Grupo.L, rankingFifa: 64),
       Selecao(nome: "Panamá", grupo: Grupo.L, rankingFifa: 45)
     ];
@@ -106,7 +107,7 @@ class BancoDadosCopa {
 }
 
 // =========================================================================
-// ALUNO 3: O Mestre dos Critérios de Desempate (Ordenação Oficial FIFA 2026)
+// ALUNO 3: O Mestre dos Critérios de Desempate (Ordenação Oficial FIFA)
 // =========================================================================
 
 class Classificador {
@@ -172,7 +173,6 @@ void registrarResultadoJogo(List<Selecao> selecoes) {
     stdout.write("Cartões Vermelhos do ${timeB.nome}: ");
     int cvB = int.parse(stdin.readLineSync()!);
 
-    // Processamento
     timeA.golsPro += golsA;
     timeA.golsSofridos += golsB;
     timeA.cartoesAmarelos += caA;
@@ -229,6 +229,86 @@ void exibirClassificacao(List<Selecao> selecoes, String nomeGrupo) {
 }
 
 // =========================================================================
+// MÓDULO EXCLUSIVO: O GERENCIADOR DO MATA-MATA (Fase Eliminatória)
+// =========================================================================
+
+class GerenciadorMataMata {
+  static final Random _random = Random();
+
+  static Selecao simularPartidaUnica(Selecao timeA, Selecao timeB, String fase) {
+    print("[$fase] ${timeA.nome} VS ${timeB.nome}");
+    
+    int forcaA = 200 - timeA.rankingFifa;
+    int forcaB = 200 - timeB.rankingFifa;
+    
+    int golsA = _random.nextInt(3) + (_random.nextInt(forcaA) > _random.nextInt(forcaB) ? 1 : 0);
+    int golsB = _random.nextInt(3) + (_random.nextInt(forcaB) > _random.nextInt(forcaA) ? 1 : 0);
+
+    print(" Placar: ${timeA.nome} $golsA x $golsB ${timeB.nome}");
+
+    if (golsA != golsB) {
+      Selecao vencedor = golsA > golsB ? timeA : timeB;
+      print("-> Classificado: ${vencedor.nome}\n");
+      return vencedor;
+    } else {
+      Selecao vencedorPenaltis = _random.nextBool() ? timeA : timeB;
+      print(" [EMPATE] Decisão por pênaltis... Vitória do ${vencedorPenaltis.nome}!");
+      print("-> Classificado: ${vencedorPenaltis.nome}\n");
+      return vencedorPenaltis;
+    }
+  }
+
+  static void executarFaseEliminatorias(List<Selecao> todasSelecoes) {
+    print("\n=======================================================");
+    print(" INICIANDO A FASE DE MATA-MATA DA COPA DO MUNDO 2026 ");
+    print("=======================================================");
+    
+    List<Selecao> classificados = [];
+    List<Selecao> terceirosLugares = [];
+
+    for (var g in Grupo.values) {
+      List<Selecao> grupoFiltrado = todasSelecoes.where((s) => s.grupo == g).toList();
+      Classificador.ordenarTabela(grupoFiltrado);
+      
+      classificados.add(grupoFiltrado[0]); 
+      classificados.add(grupoFiltrado[1]); 
+      terceirosLugares.add(grupoFiltrado[2]); 
+    }
+
+    Classificador.ordenarTabela(terceirosLugares);
+    classificados.addAll(terceirosLugares.take(8));
+
+    if (classificados.length < 32) {
+      print("Erro: Não há seleções suficientes para montar a chave!");
+      return;
+    }
+
+    List<Selecao> rodadaAtual = List.from(classificados);
+
+    rodadaAtual = _jogarFase(rodadaAtual, "DEZAVOS DE FINAL (Top 32)");
+    rodadaAtual = _jogarFase(rodadaAtual, "OITAVAS DE FINAL (Top 16)");
+    rodadaAtual = _jogarFase(rodadaAtual, "QUARTAS DE FINAL (Top 8)");
+    rodadaAtual = _jogarFase(rodadaAtual, "SEMIFINAL");
+
+    print("=======================================================");
+    print("🏆 A GRANDE FINAL DA COPA DO MUNDO FIFA 2026 🏆");
+    print("=======================================================");
+    Selecao campeao = simularPartidaUnica(rodadaAtual[0], rodadaAtual[1], "FINAL");
+
+    print("🎉 PARABÉNS À SELEÇÃO DE ${campeao.nome.toUpperCase()}, CAMPEÃ MUNDIAL EM 2026! 🎉\n");
+  }
+
+  static List<Selecao> _jogarFase(List<Selecao> times, String nomeFase) {
+    print("\n--- $nomeFase ---");
+    List<Selecao> vencedores = [];
+    for (int i = 0; i < times.length; i += 2) {
+      vencedores.add(simularPartidaUnica(times[i], times[i + 1], nomeFase));
+    }
+    return vencedores;
+  }
+}
+
+// =========================================================================
 // INTERFACE CLI E MENU PRINCIPAL MULTI-GRUPO
 // =========================================================================
 
@@ -237,21 +317,22 @@ void main() async {
   await Future.delayed(Duration(seconds: 1));
   
   List<Selecao> todasSelecoes = BancoDadosCopa.inicializarSelecoes();
-  String groupAtivo = "A"; // Mantido local para controle do loop do menu
+  String grupoAtivo = "A";
   
   bool rodando = true;
   while (rodando) {
     List<Selecao> selecoesDoGrupo = todasSelecoes
-        .where((s) => s.grupo.toString().split('.').last == groupAtivo)
+        .where((s) => s.grupo.toString().split('.').last == grupoAtivo)
         .toList();
 
     print("\n==============================================");
-    print("STATUS: Gerenciando o GRUPO $groupAtivo (48 Seleções Ativas)");
+    print("STATUS: Gerenciando o GRUPO $grupoAtivo (48 Seleções Ativas)");
     print("==============================================");
     print("1. Alterar Grupo Atual (A até L)");
     print("2. Registrar Resultado de Jogo");
-    print("3. Ver Classificação do Grupo $groupAtivo");
-    print("4. Sair");
+    print("3. Ver Classificação do Grupo $grupoAtivo");
+    print("4. SIMULAR FASE DE MATA-MATA (Ir para as Eliminatórias)");
+    print("5. Sair");
     stdout.write("Selecione uma opção: ");
     
     String? opcao = stdin.readLineSync();
@@ -261,8 +342,8 @@ void main() async {
         stdout.write("Digite a letra do grupo desejado (De A a L): ");
         String? novaLetra = stdin.readLineSync()?.toUpperCase();
         if (novaLetra != null && RegExp(r'^[A-L]$').hasMatch(novaLetra)) {
-          groupAtivo = novaLetra;
-          print("Mudou para o Grupo $groupAtivo!");
+          grupoAtivo = novaLetra;
+          print("Mudou para o Grupo $grupoAtivo!");
         } else {
           print("\nErro: Grupo inválido! Escolha uma letra entre A e L.");
         }
@@ -271,72 +352,18 @@ void main() async {
         registrarResultadoJogo(selecoesDoGrupo);
         break;
       case '3':
-        exibirClassificacao(selecoesDoGrupo, groupAtivo);
+        exibirClassificacao(selecoesDoGrupo, grupoAtivo);
         break;
       case '4':
+        GerenciadorMataMata.executarFaseEliminatorias(todasSelecoes);
+        rodando = false; 
+        break;
+      case '5':
         print("\nFechando o simulador da Copa 2026. Até logo!");
         rodando = false;
         break;
       default:
-        print("\nOpção inválida! Digite um número de 1 a 4.");
+        print("\nOpção inválida! Digite um número de 1 a 5.");
     }
   }
 }
-
-import 'dart:io';
-
-void registrarJogo(Selecao timeA, Selecao timeB) {
-  print('--- REGISTRAR JOGO ---');
-
-  // 1. Pede os gols do primeiro time
-  print('Gols do ' + timeA.nome + ':');
-  String textoGolsA = stdin.readLineSync()!;
-  int golsA = int.parse(textoGolsA);
-
-  // 2. Pede os gols do segundo time
-  print('Gols do ' + timeB.nome + ':');
-  String textoGolsB = stdin.readLineSync()!;
-  int golsB = int.parse(textoGolsB);
-
-  // 3. Pede os cartões amarelos do primeiro time
-  print('Cartoes amarelos do ' + timeA.nome + ':');
-  String textoCartoesA = stdin.readLineSync()!;
-  int cartoesA = int.parse(textoCartoesA);
-
-  // 4. Pede os cartões amarelos do segundo time
-  print('Cartoes amarelos do ' + timeB.nome + ':');
-  String textoCartoesB = stdin.readLineSync()!;
-  int cartoesB = int.parse(textoCartoesB);
-
-  // 5. Atualiza os gols nos times
-  timeA.golsPro = timeA.golsPro + golsA;
-  timeA.golsSofridos = timeA.golsSofridos + golsB;
-
-  timeB.golsPro = timeB.golsPro + golsB;
-  timeB.golsSofridos = timeB.golsSofridos + golsA;
-
-  // 6. Atualiza os cartões nos times
-  timeA.cartoesAmarelos = timeA.cartoesAmarelos + cartoesA;
-  timeB.cartoesAmarelos = timeB.cartoesAmarelos + cartoesB;
-
-  // 7. Calcula os pontos
-  if (golsA > golsB) {
-    // Time A ganhou
-    timeA.pontos = timeA.pontos + 3;
-    print(timeA.nome + ' venceu!');
-  }
-
-  if (golsB > golsA) {
-    // Time B ganhou
-    timeB.pontos = timeB.pontos + 3;
-    print(timeB.nome + ' venceu!');
-  }
-
-  if (golsA == golsB) {
-    // Empate
-    timeA.pontos = timeA.pontos + 1;
-    timeB.pontos = timeB.pontos + 1;
-    print('Empate!');
-  }
-}
-
