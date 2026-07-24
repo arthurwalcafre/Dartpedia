@@ -168,4 +168,57 @@ class Classificacao {
   }
 }
 
-// Parte 3 aluno 3 finalizada
+// Parte 3 aluno 3 finalizada 
+
+// Aluno 4 Analise de dados e testes 
+
+  Future<List<Selecao>> carregarDadosDoJson() async {
+  print('\n⏳ Carregando dados das seleções do Grupo A via JSON...');
+  await Future.delayed(Duration(seconds: 1));
+
+  String jsonString = '''
+  [
+    {"nome": "México", "ranking": 15, "grupo": "A"},
+    {"nome": "África do Sul", "ranking": 59, "grupo": "A"},
+    {"nome": "Rep. Checa", "ranking": 36, "grupo": "A"},
+    {"nome": "Coreia do Sul", "ranking": 22, "grupo": "A"}
+  ]
+  ''';
+
+  List<dynamic> listaJson = jsonDecode(jsonString);
+
+  return listaJson.map((item) {
+    return Selecao(
+      nome: item['nome'],
+      rankingFIFA: item['ranking'],
+      grupo: Grupo.values.firstWhere((g) => g.name == item['grupo']),
+    );
+  }).toList();
+}
+
+int lerNumeroValido(String mensagem) {
+  while (true) {
+    stdout.write(mensagem);
+    String? entrada = stdin.readLineSync();
+
+    try {
+      if (entrada == null || entrada.trim().isEmpty) {
+        throw FormatException();
+      }
+
+      int valor = int.parse(entrada.trim());
+
+      if (valor < 0) {
+        print('Erro: Digite um placar válido!');
+        continue;
+      }
+
+      return valor;
+
+    } on FormatException {
+      print('Erro: Digite um placar válido!');
+    }
+  }
+}
+
+// Parte do aluno 4 em teste   
